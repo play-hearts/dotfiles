@@ -1,0 +1,67 @@
+[user]
+	name = Jim Lloyd
+	email = jim@play-hearts.online
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	editor = code --wait
+	eol = lf
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+[push]
+	default = tracking
+[alias]
+	l = log --oneline --decorate
+	ll = log --oneline --decorate --graph
+	lln = log --oneline --decorate --graph --name-status
+	llnr = log --oneline --decorate --reverse --name-status
+	llwho = log --oneline --pretty=tformat:'%<(20,trunc) %an %as %h %s'
+	bv = branch -lvv
+	wip = commit -am WIP
+	amend = commit --amend
+	redo = commit --all --amend --no-edit
+	fix = commit --fixup
+	st = status
+	co = checkout
+	ci = commit
+	ri = rebase --interactive
+	dam = delete-merged-branches
+	rev = log --oneline --reverse --name-status develop..HEAD
+	old = ! git for-each-ref --format='%(committerdate) %09 %(authorname) %09 %(refname)' | sort -k5n -k2M -k3n -k4n
+	sup = submodule update --init --recursive
+	supr = ! rm -rf contrib opt && git restore contrib opt && git sup
+	pushf = push --force-with-lease
+[branch]
+	autosetuprebase = always
+[rebase]
+	autosquash = 1
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[fetch]
+	prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+	rebase = true
+[init]
+	defaultBranch = develop
+[safe]
+	directory = *
+[color]
+	ui = auto
+[diff "lockb"]
+	textconv = bun
+	binary = true
