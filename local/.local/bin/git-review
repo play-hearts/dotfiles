@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# git-review: review the changes between two commits
+# This is convenient when preparing to rebase a branch, or when reviewing a pull request.
+
+# Usage: git review [tip] [num_commits]
+
+# Generates a list of commits between two commits, referred to here as the `tip` and the `base`.
+
+# By default (i.e. if no arguments are provide), the `tip` is the current branch's HEAD
+# and the `base` is the first merge commit reachable from the `tip`.
+
+# The commits are shown in chronological order, with the base commit first and the tip commit last.
+# The output is formatted as a list of commits, with each commit's hash, author email, and message,
+# and a list of the files that were changed in the commit.
+
+# If a `tip` is provided, it can be any valid git revision, such as a commit hash, branch name, or tag.
+# The `num_commits` is not provided the `base` will be the first merge commit reachable from the tip.
+# If `num_commits` is provided, the `base` will be N commits before the `tip`.
+
+tip=${1:-HEAD}
+base=${2}
+
+if [ -z "${base}" ]; then
+  base=$(git log --merges -n 1 --format="%H" $tip)
+elif [[ ${base} =~ ^[0-9]+$ ]]; then
+  base=${tip}~${base}
+fi
+
+git log --oneline --pretty=format:"%h <%ae>  %s" --reverse --name-status ${base}..${tip}
