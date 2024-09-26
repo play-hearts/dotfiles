@@ -119,4 +119,4 @@ fi
 export PATH="/usr/local/cuda/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
-export PATH=~/.local/bin:/usr/local/libtorch/bin:$PATH
+export PATH=~/hub/HeartsNN/builds/clang/bin/Release:~/.local/bin:/usr/local/libtorch/bin:$PATH
