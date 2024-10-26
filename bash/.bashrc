@@ -120,3 +120,10 @@ export PATH="/usr/local/cuda/bin:$PATH"
 export LD_LIBRARY_PATH="/usr/local/cuda/lib64:$LD_LIBRARY_PATH"
 
 export PATH=~/hub/HeartsNN/builds/clang/bin/Release:~/.local/bin:/usr/local/libtorch/bin:$PATH
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
+
+# hack for pytorch in container -- TODO figure out how to fix container.
+export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
